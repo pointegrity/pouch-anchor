@@ -4,8 +4,9 @@
 // version chain. Slice 8c of Phase 5.
 //
 // Subcommands:
-//   pouch-vault history [--stream] [--label] [--path] [--limit]
-//   pouch-vault get <drop-id> [--extract <out-path>]
+//
+//	pouch-vault history [--stream] [--label] [--path] [--limit]
+//	pouch-vault get <drop-id> [--extract <out-path>]
 package main
 
 import (

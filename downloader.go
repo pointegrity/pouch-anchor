@@ -44,17 +44,17 @@ const (
 // process; constructed in main() and shared between the stream
 // handler (pull mode) and the receiver (push mode).
 type Downloader struct {
-	client     *PouchClient
-	store      *Store
-	blobsDir   string
-	mirrorDir  string
-	statePath  string
-	chunkSize  int64
-	throttle   time.Duration
+	client    *PouchClient
+	store     *Store
+	blobsDir  string
+	mirrorDir string
+	statePath string
+	chunkSize int64
+	throttle  time.Duration
 
-	mu       sync.Mutex
-	state    *downloadState
-	wakeCh   chan struct{} // nudge the loop on new enqueue
+	mu     sync.Mutex
+	state  *downloadState
+	wakeCh chan struct{} // nudge the loop on new enqueue
 }
 
 // NewDownloader constructs the downloader. statePath is typically
@@ -370,20 +370,20 @@ type downloadState struct {
 }
 
 type downloadEntry struct {
-	DropID          string   `json:"drop_id"`
-	BlobID          string   `json:"blob_id"`
-	DeliveryID      string   `json:"delivery_id"`
-	SignedURL       string   `json:"signed_url"`
-	ExpectedSHA     string   `json:"expected_sha"`
-	Size            int64    `json:"size"`
-	MIME            string   `json:"mime"`
-	Stream          string   `json:"stream"`
-	StreamLayout    string   `json:"stream_layout,omitempty"`
-	Label           string   `json:"label"`
-	Tags            []string `json:"tags,omitempty"`
-	OriginalPath    string   `json:"original_path,omitempty"`
-	Source          string   `json:"source,omitempty"`
-	PouchUser       string   `json:"pouch_user,omitempty"`
+	DropID          string    `json:"drop_id"`
+	BlobID          string    `json:"blob_id"`
+	DeliveryID      string    `json:"delivery_id"`
+	SignedURL       string    `json:"signed_url"`
+	ExpectedSHA     string    `json:"expected_sha"`
+	Size            int64     `json:"size"`
+	MIME            string    `json:"mime"`
+	Stream          string    `json:"stream"`
+	StreamLayout    string    `json:"stream_layout,omitempty"`
+	Label           string    `json:"label"`
+	Tags            []string  `json:"tags,omitempty"`
+	OriginalPath    string    `json:"original_path,omitempty"`
+	Source          string    `json:"source,omitempty"`
+	PouchUser       string    `json:"pouch_user,omitempty"`
 	CreatedAt       time.Time `json:"created_at"`
 	ReceivedThrough int64     `json:"received_through"`
 	QueuedAt        time.Time `json:"queued_at"`

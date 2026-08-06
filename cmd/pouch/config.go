@@ -15,10 +15,11 @@ type CLIConfig struct {
 }
 
 // loadCLIConfig resolves config from (in priority order):
-//   1. environment variables (POUCH_URL, POUCH_KEY)
-//   2. file at explicit path (--config / $POUCH_CONFIG), if given
-//   3. file at <user-config-dir>/pouch/config.env
-//   4. file at /etc/pouch/cli.env
+//  1. environment variables (POUCH_URL, POUCH_KEY)
+//  2. file at explicit path (--config / $POUCH_CONFIG), if given
+//  3. file at <user-config-dir>/pouch/config.env
+//  4. file at /etc/pouch/cli.env
+//
 // File values fill in env vars NOT already set; explicit env always wins.
 func loadCLIConfig(explicit string) (*CLIConfig, error) {
 	candidates := []string{explicit}
@@ -99,4 +100,3 @@ func loadEnvFile(path string) error {
 	}
 	return scanner.Err()
 }
-

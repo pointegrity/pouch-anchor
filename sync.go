@@ -32,10 +32,10 @@ import (
 // the watch daemon's per-event handler — both end up calling
 // syncPath with these knobs.
 type syncOpts struct {
-	dry         bool   // log what would happen; skip POSTs + state write
-	maxInline   int64  // bytes; files above this use chunked upload
-	verbose     bool
-	uploader    *Uploader // chunked uploader for files > maxInline
+	dry       bool  // log what would happen; skip POSTs + state write
+	maxInline int64 // bytes; files above this use chunked upload
+	verbose   bool
+	uploader  *Uploader // chunked uploader for files > maxInline
 }
 
 const defaultMaxInline = 1 << 20 // 1 MiB — matches existing /api/items cap
@@ -233,11 +233,11 @@ func syncFile(ctx context.Context, client *PouchClient, state *syncState, p Conf
 
 // syncFileLarge handles files over the inline cap via the chunked
 // upload protocol (Phase 5 slice 8e.producer). Steps:
-//   1. Compute sha256 streaming (don't read the whole file into RAM).
-//   2. Skip if the sync state already has the file at this sha.
-//   3. Hand to the uploader; it resumes-or-opens, chunks, completes.
-//   4. POST /api/items with body_blob_id.
-//   5. Record sync state with the returned drop_id.
+//  1. Compute sha256 streaming (don't read the whole file into RAM).
+//  2. Skip if the sync state already has the file at this sha.
+//  3. Hand to the uploader; it resumes-or-opens, chunks, completes.
+//  4. POST /api/items with body_blob_id.
+//  5. Record sync state with the returned drop_id.
 func syncFileLarge(ctx context.Context, client *PouchClient, state *syncState, p ConfigPath, rel, abs string, info os.FileInfo, opts syncOpts) (int, error) {
 	if opts.uploader == nil {
 		log.Printf("sync: skip %s — %d bytes exceeds inline cap and no uploader configured", rel, info.Size())

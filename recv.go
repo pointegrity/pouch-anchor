@@ -16,39 +16,39 @@ import (
 
 // payload mirrors what pouch POSTs (see /docs/webhooks).
 type payload struct {
-	Event     string    `json:"event"`
-	PouchUser string    `json:"pouch_user"`
-	Stream    string    `json:"stream"`
+	Event     string `json:"event"`
+	PouchUser string `json:"pouch_user"`
+	Stream    string `json:"stream"`
 	// StreamLayout is the stream's disk-layout policy ("flat" or
 	// "mirror"). When "mirror" and the drop carries an
 	// original_path, the vault also writes the bytes to
 	// mirror/<original_path>. Empty = treat as flat. Phase 5
 	// slice 8d.
-	StreamLayout string  `json:"stream_layout,omitempty"`
-	SentAt    time.Time `json:"sent_at"`
-	Drop      payloadDrop `json:"drop"`
+	StreamLayout string      `json:"stream_layout,omitempty"`
+	SentAt       time.Time   `json:"sent_at"`
+	Drop         payloadDrop `json:"drop"`
 }
 
 type payloadDrop struct {
-	ID           string         `json:"id"`
-	Label        string         `json:"label"`
-	Body         string         `json:"body"`
-	BodyEncoding string         `json:"body_encoding,omitempty"`
+	ID           string `json:"id"`
+	Label        string `json:"label"`
+	Body         string `json:"body"`
+	BodyEncoding string `json:"body_encoding,omitempty"`
 	// Blob, when present, points at a server-side blob the receiver
 	// should fetch out-of-band. URL is signed + time-limited (5 min).
-	Blob         *payloadBlob   `json:"blob,omitempty"`
-	Tags         []string       `json:"tags,omitempty"`
-	MIME         string         `json:"mime,omitempty"`
-	Source       string         `json:"source,omitempty"`
+	Blob   *payloadBlob `json:"blob,omitempty"`
+	Tags   []string     `json:"tags,omitempty"`
+	MIME   string       `json:"mime,omitempty"`
+	Source string       `json:"source,omitempty"`
 	// OriginalPath: producer-stamped path (Phase 5 slice 8c).
 	// Empty for drops produced by non-vault flows; populated by
 	// pouch-vault sync/watch and pouch-vault-git put.
-	OriginalPath string         `json:"original_path,omitempty"`
-	CreatedAt    time.Time      `json:"created_at"`
+	OriginalPath string    `json:"original_path,omitempty"`
+	CreatedAt    time.Time `json:"created_at"`
 }
 
 type payloadBlob struct {
-	ID     string `json:"id"`                // for the materialize-time ACK
+	ID     string `json:"id"` // for the materialize-time ACK
 	URL    string `json:"url"`
 	Size   int64  `json:"size"`
 	SHA256 string `json:"sha256"`

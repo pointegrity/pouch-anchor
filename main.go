@@ -43,16 +43,16 @@ import (
 const Version = "0.8.0"
 
 type config struct {
-	pouchURL    string
+	pouchURL   string
 	vaultKey   string
-	hmacSecret  string
-	publicURL   string
-	dbPath      string
-	blobsDir    string
-	mirrorDir   string
-	listenAddr  string
-	name        string
-	heartbeat   time.Duration
+	hmacSecret string
+	publicURL  string
+	dbPath     string
+	blobsDir   string
+	mirrorDir  string
+	listenAddr string
+	name       string
+	heartbeat  time.Duration
 	// paths is the multi-folder declaration this vault binary
 	// owns. Each entry is a {path, stream, label?}. The vault
 	// sends paths[] on register + heartbeat; the cloud
@@ -60,23 +60,26 @@ type config struct {
 	// vault-declares-paths-cloud-reflects-channels. Empty list
 	// is allowed — vault pairs but routes nothing until paths
 	// are configured.
-	paths       []ConfigPath
+	paths []ConfigPath
 }
 
 // ConfigPath is one entry parsed out of VAULT_PATHS. JSON shape:
-//   [{"path":"scrapes/","stream":"trip","direction":"watch"}]
+//
+//	[{"path":"scrapes/","stream":"trip","direction":"watch"}]
 //
 // Direction controls which data flow uses this entry:
-//   "mirror" (default) — cloud delivers drops here (SSE-mirror flow).
-//   "watch"            — vault scans this folder for new/changed
-//                        files and POSTs them as drops via
-//                        `pouch-vault sync` / `watch` subcommands.
+//
+//	"mirror" (default) — cloud delivers drops here (SSE-mirror flow).
+//	"watch"            — vault scans this folder for new/changed
+//	                     files and POSTs them as drops via
+//	                     `pouch-vault sync` / `watch` subcommands.
+//
 // Per decision vault-producer-mode-and-local-only-git.
 type ConfigPath struct {
-	Path      string          `json:"path"`
-	Stream    string          `json:"stream"`
-	Label     string          `json:"label,omitempty"`
-	Direction string          `json:"direction,omitempty"`
+	Path      string `json:"path"`
+	Stream    string `json:"stream"`
+	Label     string `json:"label,omitempty"`
+	Direction string `json:"direction,omitempty"`
 	// Snapshot is the optional periodic-snapshot config (slice 8f).
 	// When present, this path is schedule-driven: a per-path
 	// goroutine ticks at the configured interval and runs the kind-
@@ -141,10 +144,10 @@ func loadConfig() (*config, error) {
 
 	// CLI flag wins; else env (now possibly seeded from a file);
 	// else built-in default.
-	pickStr(&c.pouchURL,   "POUCH_URL", "")
-	pickStr(&c.vaultKey,  "POUCH_VAULT_KEY", "")
+	pickStr(&c.pouchURL, "POUCH_URL", "")
+	pickStr(&c.vaultKey, "POUCH_VAULT_KEY", "")
 	pickStr(&c.hmacSecret, "POUCH_HMAC_SECRET", "")
-	pickStr(&c.publicURL,  "POUCH_PUBLIC_URL", "")
+	pickStr(&c.publicURL, "POUCH_PUBLIC_URL", "")
 	if c.dbPath == "" {
 		// Use OS-conventional default if neither env nor flag set it.
 		if d, err := defaultDBPath(); err == nil {
@@ -175,7 +178,7 @@ func loadConfig() (*config, error) {
 		}
 	}
 	pickStr(&c.listenAddr, "VAULT_LISTEN", ":7780")
-	pickStr(&c.name,       "VAULT_NAME", "")
+	pickStr(&c.name, "VAULT_NAME", "")
 
 	// VAULT_PATHS is a JSON array of {path, stream, label?}. Parsed
 	// once at boot; the resolved list rides on every register and

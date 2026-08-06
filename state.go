@@ -2,26 +2,27 @@
 // vault has already produced as drops, so subsequent sync runs only
 // see real changes. Layout (atomic-replace on write):
 //
-//   <data-dir>/sync.json
+//	<data-dir>/sync.json
 //
 // Shape:
-//   {
-//     "version": 1,
-//     "paths": {
-//       "<watch-path>": {
-//         "scanned_at": "RFC3339",
-//         "files": {
-//           "<relative-file>": {
-//             "sha256":   "...",
-//             "size":     12345,
-//             "mtime":    "RFC3339",
-//             "drop_id":  "itm-...",
-//             "stream":   "..."
-//           }
-//         }
-//       }
-//     }
-//   }
+//
+//	{
+//	  "version": 1,
+//	  "paths": {
+//	    "<watch-path>": {
+//	      "scanned_at": "RFC3339",
+//	      "files": {
+//	        "<relative-file>": {
+//	          "sha256":   "...",
+//	          "size":     12345,
+//	          "mtime":    "RFC3339",
+//	          "drop_id":  "itm-...",
+//	          "stream":   "..."
+//	        }
+//	      }
+//	    }
+//	  }
+//	}
 //
 // Per decision vault-producer-mode-and-local-only-git.
 package main
@@ -37,13 +38,13 @@ import (
 const syncStateVersion = 1
 
 type syncState struct {
-	Version int                          `json:"version"`
-	Paths   map[string]*syncStatePath    `json:"paths"`
+	Version int                       `json:"version"`
+	Paths   map[string]*syncStatePath `json:"paths"`
 }
 
 type syncStatePath struct {
-	ScannedAt time.Time                       `json:"scanned_at"`
-	Files     map[string]*syncStateFile       `json:"files"`
+	ScannedAt time.Time                 `json:"scanned_at"`
+	Files     map[string]*syncStateFile `json:"files"`
 }
 
 type syncStateFile struct {

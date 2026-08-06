@@ -3,15 +3,15 @@
 // One subcommand matters: `pouch put` — pipe / file / clipboard /
 // arg-vector to a pouch instance using an ingress key.
 //
-//   echo "quick note" | pouch put
-//   pouch put README.md --label "project readme"
-//   pouch put -c                              # from system clipboard
-//   pbpaste | pouch put --label "from clipboard"
-//   pouch put image.png --binary --mime image/png   # raw binary
+//	echo "quick note" | pouch put
+//	pouch put README.md --label "project readme"
+//	pouch put -c                              # from system clipboard
+//	pbpaste | pouch put --label "from clipboard"
+//	pouch put image.png --binary --mime image/png   # raw binary
 //
 // Auth: ingress key (POUCH_KEY). Get one from your pouch admin via
 //
-//   pouch key create --owner <you> --label <where-you'll-use-it>
+//	pouch key create --owner <you> --label <where-you'll-use-it>
 //
 // run on the pouch server. The plaintext key is shown ONCE; paste it
 // into your config.

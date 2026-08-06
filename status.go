@@ -16,12 +16,12 @@ type Status struct {
 	// Set once at startup, read forever.
 	VaultName string
 	VaultID   string
-	Version    string
-	Mode       string // "pull" or "push"
-	Hostname   string
-	PouchURL   string
-	DBPath     string
-	StartedAt  time.Time
+	Version   string
+	Mode      string // "pull" or "push"
+	Hostname  string
+	PouchURL  string
+	DBPath    string
+	StartedAt time.Time
 
 	// Updated by stream.go on connect/disconnect.
 	streamConnected atomic.Bool

@@ -17,9 +17,9 @@ import (
 // long-lived API key minted by `pouch vault create`, sent in
 // the X-Vault-Key header.
 type PouchClient struct {
-	BaseURL    string        // e.g. "https://pouch.pointegrity.com"
-	APIKey     string        // pk_... from `pouch vault create`
-	HTTPClient *http.Client  // nil → default with 10s timeout
+	BaseURL    string       // e.g. "https://pouch.pointegrity.com"
+	APIKey     string       // pk_... from `pouch vault create`
+	HTTPClient *http.Client // nil → default with 10s timeout
 	UserAgent  string
 }
 

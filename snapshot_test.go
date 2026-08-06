@@ -39,10 +39,10 @@ func TestParseSnapshotInterval(t *testing.T) {
 		{"15m", 15 * time.Minute, false},
 		{"1d", 24 * time.Hour, false},
 		{"3d", 72 * time.Hour, false},
-		{"0s", 0, true},     // zero-or-negative refused
-		{"-1m", 0, true},    // negative refused
-		{"hello", 0, true},  // unparseable
-		{"1d.5", 0, true},   // bad day form
+		{"0s", 0, true},    // zero-or-negative refused
+		{"-1m", 0, true},   // negative refused
+		{"hello", 0, true}, // unparseable
+		{"1d.5", 0, true},  // bad day form
 	}
 	for _, c := range cases {
 		got, err := parseSnapshotInterval(c.in)

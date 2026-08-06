@@ -13,11 +13,11 @@ import (
 
 // Drop is the row we persist per webhook delivery.
 type Drop struct {
-	DeliveryID   string // X-Pouch-Delivery (idempotency)
-	DropID       string // pouch's itm-... id
-	PouchUser    string
-	Stream       string
-	Label        string
+	DeliveryID string // X-Pouch-Delivery (idempotency)
+	DropID     string // pouch's itm-... id
+	PouchUser  string
+	Stream     string
+	Label      string
 
 	// Body is the inline payload — utf8 text or base64 binary —
 	// when small enough to live in SQLite. For binary drops over
@@ -33,9 +33,9 @@ type Drop struct {
 	BodyBlobPath string
 	BodySize     int64
 
-	Tags         []string
-	MIME         string
-	Source       string
+	Tags   []string
+	MIME   string
+	Source string
 	// OriginalPath is the source-side path the drop came from
 	// (e.g. "scrapes/example.com/page.html" or "session-1.json").
 	// Populated from the WebhookDrop.OriginalPath field that

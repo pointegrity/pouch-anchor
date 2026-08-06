@@ -7,10 +7,11 @@
 // already logged in.
 //
 // Routes:
-//   GET /ui                    — single-file HTML page (vanilla JS)
-//   GET /api/local/status      — vault's runtime status (JSON)
-//   GET /api/local/drops       — recent drops, optional ?q=, ?limit=
-//   GET /api/local/drops/{id}  — one drop's full record + body
+//
+//	GET /ui                    — single-file HTML page (vanilla JS)
+//	GET /api/local/status      — vault's runtime status (JSON)
+//	GET /api/local/drops       — recent drops, optional ?q=, ?limit=
+//	GET /api/local/drops/{id}  — one drop's full record + body
 package main
 
 import (
@@ -49,12 +50,12 @@ func mountLocalUI(mux *http.ServeMux, st *Store, blobsDir string) {
 		out := map[string]any{
 			"vault_name": status.VaultName,
 			"vault_id":   status.VaultID,
-			"version":     status.Version,
-			"mode":        status.Mode,
-			"hostname":    status.Hostname,
-			"pouch_url":   status.PouchURL,
-			"db_path":     status.DBPath,
-			"started_at":  status.StartedAt.UTC(),
+			"version":    status.Version,
+			"mode":       status.Mode,
+			"hostname":   status.Hostname,
+			"pouch_url":  status.PouchURL,
+			"db_path":    status.DBPath,
+			"started_at": status.StartedAt.UTC(),
 
 			"stream_connected":      status.streamConnected.Load(),
 			"last_connected_at":     unixNanoToISO(status.lastConnectedAt.Load()),
@@ -148,7 +149,6 @@ func looksLikeSha256(s string) bool {
 	}
 	return true
 }
-
 
 func writeJSON(w http.ResponseWriter, code int, v any) {
 	w.Header().Set("Content-Type", "application/json")

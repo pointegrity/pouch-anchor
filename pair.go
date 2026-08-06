@@ -6,8 +6,9 @@
 // user pastes them into vault.env, then runs the daemon normally.
 //
 // See decisions:
-//   vault-pairing-three-renders-of-one-key
-//   vault-host-architecture
+//
+//	vault-pairing-three-renders-of-one-key
+//	vault-host-architecture
 package main
 
 import (
